@@ -37,6 +37,8 @@ dependencies:
   cupertino_icons: ^1.0.8
   network_info_plus: ^6.1.0
   win32: ^5.7.1
+  desktop_window: ^0.4.1
+  window_manager: ^0.4.2
 
 dev_dependencies:
   flutter_test:
