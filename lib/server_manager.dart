@@ -23,11 +23,22 @@ class ServerManager {
         log("Port: $_port");
 
         await for (var request in server) {
+          HttpConnectionInfo? info = request.connectionInfo;
+
+          String? remoteAddress = info?.remoteAddress.toString();
+          String? remotePort = info?.remotePort.toString();
+
+          log("info.remoteAddress:$remoteAddress");
+          log("info.remoteAddress:$remotePort");
+
           request.response
             ..headers.contentType =
                 ContentType("text", "plain", charset: "utf-8")
-            ..write('Hello, world')
+            ..write('Comando Recebido!')
             ..close();
+          if (request.method == "GET") {
+            log("Desligando Computador...");
+          }
         }
       },
     );
