@@ -1,7 +1,10 @@
 import 'dart:developer';
 import 'dart:io';
 
+import 'package:ip_server/command_manager.dart';
+
 class ServerManager {
+  CommandManager cmd = CommandManager();
   late String _address = "...";
   late String _port = "...";
 
@@ -38,6 +41,7 @@ class ServerManager {
             ..close();
           if (request.method == "GET") {
             log("Desligando Computador...");
+            cmd.turnOfTheMachine();
           }
         }
       },
