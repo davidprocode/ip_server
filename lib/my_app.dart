@@ -11,8 +11,9 @@ class MyApp extends StatefulWidget {
 }
 
 class _MyAppState extends State<MyApp> {
+  ServerManager server = ServerManager();
   String _ipAddrLocal = 'Fetching IP...';
-  String _ipAddrServer = 'Starting server...';
+  String _ipAddrServer = 'Starting Server...';
 
   @override
   void initState() {
@@ -42,7 +43,7 @@ class _MyAppState extends State<MyApp> {
     for (var networkInterface in networkInterfaces) {
       for (var address in networkInterface.addresses) {
         if (address.type == InternetAddressType.IPv4) {
-          log('IP address: ${address.address}');
+          log('IP Local Address: ${address.address}');
           setState(() {
             _ipAddrLocal = address.address;
           });
@@ -51,12 +52,11 @@ class _MyAppState extends State<MyApp> {
     }
   }
 
-  Future<void> _startServer() async {
-    ServerManager server = ServerManager();
+  _startServer() {
+    log("_startServer has been called!");
     server.startServer();
 
-    setState(() {
-      _ipAddrServer = '${server.address}:${server.port}';
-    });
+    setState(() => _ipAddrServer = "${server.address}:${server.port}");
+    log('IP Server Address: $_ipAddrServer');
   }
 }
