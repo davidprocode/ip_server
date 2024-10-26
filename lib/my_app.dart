@@ -13,13 +13,12 @@ class MyApp extends StatefulWidget {
 class _MyAppState extends State<MyApp> {
   ServerManager server = ServerManager();
   String _ipAddrLocal = 'Fetching IP...';
-  String _ipAddrServer = 'Starting Server...';
 
   @override
   void initState() {
     super.initState();
     _getWindowsEthernetIP();
-    _startServer();
+    server.startServer();
   }
 
   @override
@@ -30,8 +29,6 @@ class _MyAppState extends State<MyApp> {
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
             Text('IP Local: $_ipAddrLocal'),
-            const SizedBox(width: 20),
-            Text('IP Server: $_ipAddrServer')
           ],
         ),
       ),
@@ -50,13 +47,5 @@ class _MyAppState extends State<MyApp> {
         }
       }
     }
-  }
-
-  _startServer() {
-    log("_startServer has been called!");
-    server.startServer();
-
-    setState(() => _ipAddrServer = "${server.address}:${server.port}");
-    log('IP Server Address: $_ipAddrServer');
   }
 }
