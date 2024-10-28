@@ -1,6 +1,8 @@
+import 'dart:async';
 import 'dart:developer';
 import 'dart:io';
 import 'package:flutter/material.dart';
+import 'package:window_manager/window_manager.dart';
 import 'server_manager.dart';
 
 class MyApp extends StatefulWidget {
@@ -19,6 +21,7 @@ class _MyAppState extends State<MyApp> {
     super.initState();
     _getWindowsEthernetIP();
     server.startServer();
+    _autoClose();
   }
 
   @override
@@ -47,5 +50,17 @@ class _MyAppState extends State<MyApp> {
         }
       }
     }
+  }
+
+  void _autoClose() {
+    int countdownSeconds = 10;
+    Timer.periodic(const Duration(seconds: 1), (Timer timer) async {
+      if (countdownSeconds == 0) {
+        timer.cancel();
+        await windowManager.hide();
+      } else {
+        countdownSeconds--;
+      }
+    });
   }
 }

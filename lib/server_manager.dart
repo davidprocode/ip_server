@@ -1,7 +1,6 @@
 import 'dart:developer';
 import 'dart:io';
-
-import 'package:ip_server/command_manager.dart';
+import 'command_manager.dart';
 
 class ServerManager {
   CommandManager cmd = CommandManager();
